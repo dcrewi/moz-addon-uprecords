@@ -1,0 +1,31 @@
+
+body {
+    font-family: monospace;
+    font-size: small;
+}
+
+#records-table {
+    width: 100%;
+    /* height: 100%; */
+}
+
+#records-table-body tr td {
+    white-space: nowrap;
+}
+
+#records-table-body tr td.rank,
+#records-table-body tr td.uptime {
+    text-align: right;
+}
+
+#records-table-body tr td.uptime {
+    font-family: monospace;
+}
+
+#records-table-body tr td.boottime {
+    font-size: smaller;
+}
+
+#records-table-body tr.current-session {
+    font-weight: bold;
+}
