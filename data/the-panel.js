@@ -48,13 +48,13 @@ self.port.on('records', function (records) {
   }
 
   if (session.oneUpIn) {
-    tableBody.appendChild(goalRow('1up in', session.oneUpIn, session.bootTime));
+    tableBody.appendChild(goalRow('1up in', session.oneUpIn));
   }
   if (session.toplistIn) {
-    tableBody.appendChild(goalRow('HOF in', session.toplistIn, session.bootTime));
+    tableBody.appendChild(goalRow('HOF in', session.toplistIn));
   }
   if (session.numOneIn) {
-    tableBody.appendChild(goalRow('no1 in', session.numOneIn, session.bootTime));
+    tableBody.appendChild(goalRow('no1 in', session.numOneIn));
   }
 });
 
@@ -84,7 +84,7 @@ function prettyPrintUptime(msecs) {
 }
 
 
-function goalRow(kind, delta, bootTime) {
+function goalRow(kind, delta) {
   var row, td;
   row = document.createElement('tr');
 
@@ -104,7 +104,7 @@ function goalRow(kind, delta, bootTime) {
 
   td = document.createElement('td');
   td.setAttribute('class', 'boottime');
-  td.appendChild(document.createTextNode(new Date(bootTime + delta)
+  td.appendChild(document.createTextNode(new Date(Date.now() + delta)
                                          .toLocaleString()));
   row.appendChild(td);
 
