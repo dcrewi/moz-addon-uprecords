@@ -56,6 +56,9 @@ self.port.on('records', function (records) {
   if (session.numOneIn) {
     tableBody.appendChild(goalRow('no1 in', session.numOneIn));
   }
+
+  let el = document.getElementById('records-table');
+  self.port.emit('resizeTo', 16+el.clientWidth, 16+el.clientHeight);
 });
 
 function prettyPrintUptime(msecs) {
