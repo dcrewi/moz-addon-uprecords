@@ -5,7 +5,7 @@
   "homepage": "https://github.com/dcrewi/moz-addon-uprecords",
   "description": "a mozilla addon to record firefox uptimes",
   "author": "David Creswick <dcrewi@gyrae.net>",
-  "license": "MPL 2.0",
+  "license": "MIT",
   "version": "0.0.4",
   "icon": "data/icon.png",
   "icon64": "data/icon.png"
