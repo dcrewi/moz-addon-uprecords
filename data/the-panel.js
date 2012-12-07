@@ -21,28 +21,10 @@ self.port.on('records', function (records) {
       session = record;
     }
 
-    var td = document.createElement('td');
-    td.setAttribute('class', 'rank');
-    td.appendChild(document.createTextNode((record.rank || i) + 1));
-    row.appendChild(td);
-
-    td = document.createElement('td');
-    td.setAttribute('class', 'uptime');
-    td.appendChild(document.createTextNode(prettyPrintUptime(record.uptime)));
-    row.appendChild(td);
-
-    td = document.createElement('td');
-    td.setAttribute('class', 'version');
-    if (record.version) {
-      td.appendChild(document.createTextNode(record.version));
-    }
-    row.appendChild(td);
-
-    td = document.createElement('td');
-    td.setAttribute('class', 'boottime');
-    td.appendChild(document.createTextNode(new Date(record.bootTime)
-                                           .toLocaleString()));
-    row.appendChild(td);
+    addCell(row, 'rank', (record.rank || i) + 1);
+    addCell(row, 'uptime', prettyPrintUptime(record.uptime));
+    addCell(row, 'version', record.version);
+    addCell(row, 'boottime', new Date(record.bootTime).toLocaleString());
 
     tableBody.appendChild(row);
   }
@@ -60,6 +42,13 @@ self.port.on('records', function (records) {
   let el = document.getElementById('records-table');
   self.port.emit('resizeTo', 16+el.clientWidth, 16+el.clientHeight);
 });
+
+function addCell(row, styleClass, entry) {
+  var td = document.createElement('td');
+  if (styleClass) td.setAttribute('class', styleClass);
+  if (entry) td.appendChild(document.createTextNode(entry));
+  row.appendChild(td);
+}
 
 function prettyPrintUptime(msecs) {
   var days = ~~(msecs / (24*60*60*1000));
@@ -88,28 +77,13 @@ function prettyPrintUptime(msecs) {
 
 
 function goalRow(kind, delta) {
-  var row, td;
+  var row;
   row = document.createElement('tr');
 
-  td = document.createElement('td');
-  td.setAttribute('class', 'rank');
-  td.appendChild(document.createTextNode(kind));
-  row.appendChild(td);
-
-  td = document.createElement('td');
-  td.setAttribute('class', 'uptime');
-  td.appendChild(document.createTextNode(prettyPrintUptime(delta)));
-  row.appendChild(td);
-
-  td = document.createElement('td');
-  td.appendChild(document.createTextNode('at'));
-  row.appendChild(td);
-
-  td = document.createElement('td');
-  td.setAttribute('class', 'boottime');
-  td.appendChild(document.createTextNode(new Date(Date.now() + delta)
-                                         .toLocaleString()));
-  row.appendChild(td);
+  addCell(row, 'rank', kind);
+  addCell(row, 'uptime', prettyPrintUptime(delta));
+  addCell(row, null, 'at');
+  addCell(row, 'boottime', new Date(Date.now() + delta).toLocaleString());
 
   return row;
 }
