@@ -9,11 +9,6 @@ self.port.on('records', function (records) {
   var i;
   var session;
   for (i = 0; i < records.length; ++i) {
-    // If the current session is in the top N, skip the last record.
-    if (i+1 === records.length && !records[i].isCurrentSession) {
-      break;
-    }
-
     var record = records[i];
     var row = document.createElement('tr');
     if (record.isCurrentSession) {
