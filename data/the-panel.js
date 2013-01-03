@@ -6,6 +6,7 @@ self.port.on('records', function (records) {
     tableBody.removeChild(tableBody.lastChild);
   }
 
+  // Add a table row for each record.
   var i;
   var session;
   for (i = 0; i < records.length; ++i) {
@@ -24,16 +25,18 @@ self.port.on('records', function (records) {
     tableBody.appendChild(row);
   }
 
+  // Add rows that count down to milestones.
   if (session.oneUpIn) {
-    tableBody.appendChild(goalRow('1up in', session.oneUpIn));
+    tableBody.appendChild(milestoneRow('1up in', session.oneUpIn));
   }
   if (session.toplistIn) {
-    tableBody.appendChild(goalRow('HOF in', session.toplistIn));
+    tableBody.appendChild(milestoneRow('HOF in', session.toplistIn));
   }
   if (session.numOneIn) {
-    tableBody.appendChild(goalRow('no1 in', session.numOneIn));
+    tableBody.appendChild(milestoneRow('no1 in', session.numOneIn));
   }
 
+  // Report the table size so that the panel can resize itself.
   let el = document.getElementById('records-table');
   self.port.emit('resizeTo', 16+el.clientWidth, 16+el.clientHeight);
 });
@@ -46,6 +49,7 @@ function addCell(row, styleClass, entry) {
 }
 
 function prettyPrintUptime(msecs) {
+  // NOTE: remember ~~ is equivalent to casting a float to an int
   var days = ~~(msecs / (24*60*60*1000));
   var hours = ~~((msecs / (60*60*1000)) % 24);
   var minutes = ~~((msecs / (60*1000)) % 60);
@@ -71,7 +75,7 @@ function prettyPrintUptime(msecs) {
 }
 
 
-function goalRow(kind, delta) {
+function milestoneRow(kind, delta) {
   var row;
   row = document.createElement('tr');
 
