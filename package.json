@@ -6,7 +6,7 @@
   "description": "record firefox uptimes",
   "author": "David Creswick <dcrewi@gyrae.net>",
   "license": "MIT",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "icon": "data/icon.png",
   "icon64": "data/icon.png"
 }
