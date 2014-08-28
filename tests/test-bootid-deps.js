@@ -1,6 +1,6 @@
 const { Cc, Ci, Cr } = require('chrome');
 
-const CATEGORY = require('self').id;
+const CATEGORY = require('sdk/self').id;
 const ENTRY = 'TEST-ENTRY';
 const VALUE = 'TEST-VALUE';
 
